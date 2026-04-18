@@ -1,0 +1,633 @@
+@charset "utf-8";
+
+@media screen and (max-width : 1440px) {
+    .right {
+        padding:30px 40px;
+    }
+    .right h1 {
+        font-size: 1.9rem;
+        margin-top: 60px;
+        margin-bottom: 10px;
+    }
+    .right h1::after{
+        width:230px;
+    }
+    
+    .right h2 {
+        letter-spacing:1.5px;
+        margin-top: 10px
+    }
+
+    .page1 .icon, .page1 .icon2, .page1 .icon3, .page1 .icon4 {
+        margin: 8px;
+        width: 60px;
+        height: 60px;
+    }
+
+    .tooltip {
+        bottom: -25px; left: 50%;
+    }
+    .tooltip::after {
+        top: -12px; left: 50%;
+    }
+    .icon-item:last-child .tooltip {
+        transform:translateX(-80%) translateY(0px);
+    }
+    .icon-item:last-child .tooltip::after {
+        left: auto; right: 40px;             
+        transform: translateX(0);
+    }
+    
+    .stats {
+        margin: 10px auto;
+    }
+
+    .voice {
+        gap: 8px;
+        margin: 0;
+        margin-bottom: 20px;
+    }
+    .play-btn {
+        width: 110px;
+        letter-spacing: 0;
+    }
+
+
+    .imageArea{
+        height:100vh;
+        display:flex;
+        padding:30px 60px;
+        gap:40px;
+        overflow:hidden;
+        margin: 30px;
+    }
+    
+    .leftGroup{
+        display:flex;
+        flex-direction:column;
+        gap:30px;
+        flex:1.2;
+        height:100%;
+    }
+    .rightGroup{
+        flex:0.5;
+        height:100%;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+    }
+    .leftGroup, .rightGroup{
+        min-height:0;
+    }
+    
+    .imgBox{
+        width:100%;
+        flex:1;
+        border-radius:20px;
+        overflow:hidden;
+        background: rgba(255, 255, 255, 0.3);
+        backdrop-filter: blur(10px);
+        box-shadow:0 5px 15px rgba(0,0,0,0.2);
+        display:flex;
+        align-items:center;
+        justify-content:center;
+    }
+    .imgBox img{
+        max-width:100%;
+        max-height:100%;
+        object-fit:contain;
+        display:block;
+    }
+    
+    .large{ aspect-ratio: 16 / 9; flex: 1; }
+    .small{ aspect-ratio: 4 / 3; flex: 1; }
+    .weapon{
+        width:100%;
+        height:100%;
+    }
+    .weapon img{
+        width:55%;
+        height:100%;
+        object-fit:contain;
+        display:block;
+    }
+    .desc {
+        font-size: 1.1rem;
+    }
+
+    .page3 .icon{
+        top: 155px; right: 100px;
+        z-index: 10;
+    }
+}
+
+/* ------------------------------------------- */
+
+@media screen and (max-width : 1024px) {
+    .left {
+        width: 60%;
+    }
+    .character {
+        width: auto;
+        height: 100vh;
+        left: 50%;
+    }
+    
+    .character2 {
+        width: auto;
+        height: 100vh;
+        bottom:10%;
+        left:30%;
+    }
+    
+    .right {
+        width:40%;
+        padding:20px 30px;
+        display:flex;
+    }
+    .right h1 {
+        font-size: 1.9rem;
+        margin-top: 30px;
+        margin-bottom: 10px;
+    }
+    .right h1::after{
+        width:230px;
+    }
+    
+    .right h2 {
+        letter-spacing:1.5px;
+        font-size: 1rem;
+    }
+
+    .page1 .iconbox{
+        display:flex;
+        align-items: center;
+        margin: 0 auto;
+    }
+    .page1 .icon, .page1 .icon2, .page1 .icon3, .page1 .icon4 {
+        margin: 5px;
+        width: 55px;
+        height: 55px;
+    }
+    .tooltip {
+        bottom: -18px; left: 50%;
+    }
+
+    .tooltip::after {
+        top: -12px; left: 50%;
+    }
+    
+    .voice {
+        gap: 8px;
+        margin: 0;
+        margin-bottom: 30px;
+    }
+
+    .play-btn {
+        padding: 8px;
+    }
+
+    .imageArea{
+        padding:10px 40px;
+        gap:20px;
+    }
+    
+    .leftGroup{
+        gap:20px;
+    }
+    
+    .weapon img{
+        width:80%;
+    }
+
+    .page2 .keyword {
+        font-size: 1.1rem;
+    }
+    
+    .textArea{
+        padding:30px 80px;
+    }
+
+    .page3 .icon{
+        top: 99px; left: 170px;
+        gap: 5px
+    }
+
+    .popup {
+        position: fixed;
+        top: 0; left: -100%;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.95);
+        z-index: 999;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        transition: all 0.5s;
+        padding: 5vh 5vw;
+    }
+    
+    .popup video {
+        width: 100%;
+    }
+    
+}
+
+/* ------------------------------------------- */
+
+@media screen and (max-width : 768px) {
+    header {
+        padding: 0 1rem;
+    }
+    .menu{
+        display: none;
+    }
+    main {
+        width: 100%;
+        height: calc(100% - 70px);
+        margin: 0 auto;
+    }
+
+    .mobile {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 70px;
+        background: white;
+        box-shadow: 0 1px 3px gray;
+        z-index: 999;
+    }
+    .hamburger {
+        display: block;
+        position: absolute;
+        top: 35px; left: 90%;
+        transform: translate(-50%, -50%);
+    }
+    .mobilemenu {
+        text-align: center;
+        /* display: block; */
+        position: absolute;
+        top: 70px; left: 0;
+        width: 100%;
+        line-height: 3;
+        background-color: white;
+        opacity: 95%;
+        cursor: pointer;
+    }
+
+    .page1 {
+        margin-top: 70px;
+    }  
+    .left {
+        width: 60%;
+    }
+    .character {
+        width: auto;
+        height: 100vh;
+        left: 50%;
+    }
+    
+    .character2 {
+        width: auto;
+        height: 100vh;
+        bottom:15%;
+        left: 30%;
+    }
+    
+    .right {
+        width:40%;
+        padding:25px;
+        display:flex;
+    }
+    .right h1 {
+        font-size: 1.9rem;
+    }
+    .right h1::after{
+        width:225px;
+    }
+    
+    .right h2 {
+        letter-spacing:1.5px;
+        font-size: 1rem;
+    }
+
+    .page1 .iconbox{
+        display:flex;
+        align-items: center;
+        margin: 0 auto;
+    }
+    .page1 .icon, .icon2, .icon3, .icon4{
+        margin:15px 5px;
+        width:55px;
+        height:55px;
+    }
+    .tooltip {
+        bottom: -18px; left: 50%;
+    }
+
+    .tooltip::after {
+        top: -12px; left: 50%;
+    }
+
+    .page2 {
+        padding: 30px;
+    }
+    .imageArea{
+        height:100vh;
+        padding:20px;
+        gap:20px;
+        margin:0;
+    }
+    
+    .leftGroup{
+        flex:1;
+        gap:12px;
+        min-height:0;
+    }
+    
+    .rightGroup{
+        flex:0.5;
+        min-height:0;
+    }
+    
+    .large, .small{
+        aspect-ratio:unset;
+    }
+
+    .large{ flex:1; }
+    .small{ flex:1; }
+    
+    .imgBox{
+        min-height:0;
+    }
+    
+    .weapon img{
+        width:70%;
+        height:auto;
+    }
+
+
+    .textArea{
+        padding:30px;
+    }
+
+    .page3 .icon{
+        top: 99px; left: 170px;
+        gap: 5px
+    }
+
+    footer{
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        text-align:center;
+        padding:3rem;
+        width: 100%;
+        margin-left: 0px;
+    }
+    
+    footer p{
+        margin: 0;
+    }
+}
+
+/* ------------------------------------------- */
+
+@media screen and (max-width : 425px) {
+    header {
+        padding: 0 1rem;
+    }
+    .menu{
+        display: none;
+    }
+    main {
+        width: 100%;
+        height: calc(100% - 70px);
+        margin: 0 auto;
+    }
+
+    .mobile {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 70px;
+        background: white;
+        box-shadow: 0 1px 3px gray;
+        z-index: 999;
+    }
+    .hamburger {
+        display: block;
+        position: absolute;
+        top: 35px; left: 90%;
+        transform: translate(-50%, -50%);
+    }
+    .mobilemenu {
+        text-align: center;
+        /* display: block; */
+        position: absolute;
+        top: 70px; left: 0;
+        width: 100%;
+        line-height: 3;
+        background-color: white;
+        opacity: 95%;
+        cursor: pointer;
+    }
+
+    .page1 {
+        position: relative;
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        background-color: rgb(190, 161, 161);
+        overflow: hidden;
+    }
+    .left {
+        width: 100%;
+    }
+    
+    .character {
+        width: auto;
+        height: 100vh;
+        top:45%; left: 43%;
+    }
+    .character:hover{
+        transform:translate(-50%, -50%);
+    }
+    
+    .character2 {
+        display: none;
+    }
+    
+    .right {
+        width:100%;
+        height: 100vh;
+        padding:20px;
+        display:flex;
+        position: absolute;
+        bottom: 0px;
+        align-items: center;
+        z-index: 10;
+        border-radius: 25px 25px 0 0;
+        transform: translateY(95%);
+        transition: transform 0.35s ease;
+        overflow: hidden;
+        
+    }
+    .right.open {
+        transform: translateY(0);
+    }
+
+    .right::before {
+        content: "";
+        display: block;
+        width: 40px;
+        height: 5px;
+        background: rgba(0, 0, 0, 0.2);;
+        border-radius: 10px;
+        margin: 0 auto 20px;
+    }
+
+    .right h1 {
+        margin-bottom: 0;
+        text-align: center;
+        font-size: 2.1rem;
+    }
+    .right h1::after {
+        width: 245px;
+    }
+    
+    .right h2 {
+        letter-spacing:1.5px;
+    }
+
+    .page1 .iconbox{
+        display:flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto;
+    }
+
+    .icon-item:last-child .tooltip {
+        transform:translateX(-50%) translateY(0px);
+    }
+    .icon-item:last-child .tooltip::after {
+        top: -12px; left: 50%; right: 50%;
+    }
+
+    .page1.blurred .left, .page1.blurred .character {
+    filter: blur(6px);
+    transition: filter 0.3s ease;}
+    
+    .page1.blurred::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 5;}
+
+    .page2 {
+        width: 100%;
+        height: auto;
+    }
+
+    .imageArea{
+        flex-direction: column;
+        height: auto;          
+        min-height: 100vh;
+        padding: 12px;
+        gap: 16px;
+        margin: 0;
+    }
+    
+    .leftGroup{
+        flex: none;
+        height: 70%;
+        gap: 12px;
+        min-height: 0;
+    }
+    .rightGroup{
+        flex: none;
+        height: 35%;
+        min-height: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .large{
+        flex:2;
+        aspect-ratio:16/9;
+    }
+    .small{
+        flex:1;
+        aspect-ratio:4/3;
+    }
+    
+    .imgBox{
+        width: 100%;
+        min-height: 0;
+    }
+    
+    .weapon{
+        display:flex;
+        align-items:center;
+        justify-content:center;
+    }
+    .weapon img{
+        width:30%;
+        height:auto;
+    }
+
+    .textArea{
+        padding:30px 10px;
+        margin-bottom: 100px;
+    }
+    .keyword {
+        letter-spacing: 0;
+    }
+
+    .page3 {
+        padding: 30px;
+    }
+    .page3 .icon{
+        top: 78px; left: 145px;
+    }
+
+    .popup button {
+        position: absolute;
+        top: 2rem; right: 2rem;
+        background: none;
+        border: 2px solid #fff;
+        color: #fff;
+        font-size: 0.9rem;
+        padding: 0.6rem 0.6rem;
+        cursor: pointer;
+        font-family: 'en';
+        letter-spacing:2px;
+        border-radius: 10px;
+    }
+    
+    .popup button:hover {
+        background-color: white;
+        color: rgba(0,0,0,0.95);
+    }
+
+    footer {
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        text-align:center;
+        padding:3rem;
+        width: 100%;
+        margin-left: 0px;
+    }
+    
+    footer p{
+        margin: 0;
+    }
+}
