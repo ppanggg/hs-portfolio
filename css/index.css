@@ -1188,8 +1188,7 @@ main {
 .slider2 .swiper-wrapper .o {
     background-color: rgb(221, 192, 255);
 }
-.slider2 .swiper-wrapper .o video {
-    transform: translate(-40%, -35%) scale(0.4);
+.slider2 .swiper-wrapper .o iframe {
     transform-origin: center;
     object-fit: cover;
     display: block;

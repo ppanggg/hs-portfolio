@@ -37,12 +37,14 @@ body.loading {
 :root {
     --main-color: #ff5d5d;
     --main-light: #ff9b9b;
-    --main-dark: #c73535;
+    --main-dark: #d84a4a;
 
-    --bg-dark: #502424;
-    --bg-darker: #381414;
+    --bg-1: #f2c3c6;
+    --bg-2: #d97a82;
+    --bg-3: #b94b55;
+    --bg-deep: #6b1f27;
 
-    --text-light: #ffdede;
+    --text: #2a0f12;
 }
 
 /* ------------------------------------------- */
@@ -265,27 +267,14 @@ main {
     display: flex;
     min-height: 100vh;
     background:
-    radial-gradient(
-        circle at 20% 20%,
-        rgba(255, 155, 165, 0.32),
-        transparent 45%
-    ),
-    radial-gradient(
-        circle at 80% 30%,
-        rgba(230, 90, 105, 0.25),
-        transparent 50%
-    ),
-    radial-gradient(
-        circle at 50% 90%,
-        rgba(255, 220, 225, 0.14),
-        transparent 55%
-    ),
+    radial-gradient(circle at 20% 20%, rgba(255, 155, 165, 0.35), transparent 45%),
+    radial-gradient(circle at 80% 30%, rgba(255, 110, 120, 0.25), transparent 50%),
     linear-gradient(
         to bottom,
-        #dbbec0 0%,
-        #c6777c 30%,
-        #a94c54 60%,
-        #731e28 100%
+        #f3c6c9 0%,
+        #e08a92 35%,
+        #c85a63 65%,
+        #7a2630 100%
     );
     overflow: hidden;
 }
@@ -294,10 +283,10 @@ main {
     position: absolute;
     inset: 0;
     background: url('../image/index2/graphics/25019656_new8.jpg') center/cover no-repeat;
-    opacity: 0.02;
+    opacity: 0.2;
     z-index: 0;
     pointer-events: none;
-    mix-blend-mode: hard-light;
+    mix-blend-mode: overlay;
 }
 
 .left {
@@ -374,7 +363,7 @@ main {
 .right h1::after{
     content:"";
     display:block;
-    width:270px;
+    width:320px;
     height:2px;
     background:#18080a;
     margin-top: 3px;
@@ -535,12 +524,12 @@ main {
     flex-direction:column;
     background:
     linear-gradient(-280deg,
-        rgba(220, 140, 150, 0.28) 70%,
-        rgba(160, 70, 80, 0.55) 100%),
+        rgba(255, 120, 130, 0.25) 70%,
+        rgba(200, 80, 90, 0.4) 100%),
     linear-gradient(-320deg,
-        #fff0f1 55%,
-        #e7b9bd 55%),
-    #f3d9db;
+        #f6d6d8 55%,
+        #e7aeb3 55%),
+    #e7aeb3;
 }
 
 .imageArea{
@@ -620,6 +609,7 @@ main {
     letter-spacing:1.2px;
     line-height: 1.7rem;
     font-size: 1.2rem;
+    backdrop-filter: blur(12px);
 }
 
 .desc{
@@ -630,6 +620,7 @@ main {
     font-size: 1.2rem;
     letter-spacing:1px;
     word-break: keep-all;
+    backdrop-filter: blur(12px);
 }
 
 .keyword,
@@ -642,7 +633,16 @@ main {
 /* ------------------------------------------- */
 
 .page3 {
-    background:#fbdfdf;
+    background:
+    radial-gradient(circle at 20% 20%, rgba(255, 120, 130, 0.25), transparent 55%),
+    radial-gradient(circle at 80% 70%, rgba(200, 80, 90, 0.4), transparent 55%),
+    linear-gradient(
+        to bottom,
+        #e7aeb3 0%,
+        #d97a82 40%,
+        #c85a63 75%,
+        #7a2630 100%
+    );
     width: 100%;
     min-height: 100vh;
     height: auto;
@@ -769,7 +769,7 @@ main {
 }
 
 .slider1 .swiper-wrapper .one {
-    background-color: rgb(221, 192, 255);
+    background-color: rgb(255, 192, 192);
 }
 .slider1 .swiper-wrapper .one video {
     transform: translate(-40%, -41%) scale(0.8);
@@ -779,7 +779,7 @@ main {
     cursor: pointer;
 }
 .slider1 .swiper-wrapper .two {
-    background-color: rgb(192, 194, 255);
+    background-color: rgb(255, 192, 192);
 }
 .slider1 .swiper-wrapper .two video {
     transform: translate(-35%, -33%) scale(0.4);
@@ -789,13 +789,13 @@ main {
     cursor: pointer;
 }
 .slider1 .swiper-wrapper .three {
-    background-color: rgb(221, 192, 255);
+    background: #7b1100 url('../image/index2/graphics/dan.png') center / cover no-repeat;
 }
 .slider1 .swiper-wrapper .four {
-    background-color: rgb(192, 194, 255);
+    background: #7b1100 url('../image/index2/graphics/dan.png') center / cover no-repeat;
 }
 .slider1 .swiper-wrapper .five {
-    background-color: rgb(221, 192, 255);
+    background: #7b1100 url('../image/index2/graphics/dan.png') center / cover no-repeat;
 }
 
 .swiper-pagination {
