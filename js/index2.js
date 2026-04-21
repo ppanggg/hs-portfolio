@@ -114,35 +114,59 @@ $(function () {
 
 
     /* =========================
-        SWIPER VIDEO HOVER
+    SWIPER VIDEO HOVER
     ========================= */
-    $('.gallery-collection .swiper-slide').each(function () {
-
-        $(this).mouseenter(function () {
-            $(this).find('video')[0].play();
-        });
-
-        $(this).mouseleave(function () {
-            const vid = $(this).find('video')[0];
-            vid.pause();
-            vid.currentTime = 0;
-        });
-
-        $(this).click(function () {
-            const title = $(this).find('h3').text();
-            const text = $(this).find('p').text();
-            const videoSrc = $(this).find('video').attr('src');
-
-            const popupVideo = $('.popup').find('video')[0];
-
-            $('.popup h2').text(title);
-            $('.popup p').text(text);
-            $('.popup video').attr('src', videoSrc);
-
-            $('.popup').addClass('on');
-            popupVideo.play();
-        });
+    $(document).on('mouseenter', '.gallery-collection .swiper-slide', function () {
+        const vid = $(this).find('video')[0];if (vid) vid.play();
     });
+    
+    $(document).on('mouseleave', '.gallery-collection .swiper-slide', function () {
+
+        const vid = $(this).find('video')[0];
+
+        if (vid) {
+        vid.pause();
+        vid.currentTime = 0;}
+    });
+    
+    
+    $(document).on('click', '.gallery-collection .swiper-slide', function () {
+
+    const title = $(this).find('h3').text();
+    const text = $(this).find('p').html();
+
+    const $popup = $('.popup');
+    const $popupVideo = $popup.find('.popup-video');
+    const $popupImg = $popup.find('.popup-img');
+    const $popupIframe = $popup.find('.popup-iframe');
+
+    $popup.find('h2').text(title);
+    $popup.find('p').html(text);
+
+    const video = $(this).find('video');
+    const img = $(this).find('img');
+    const iframe = $(this).find('iframe');
+
+    if ($popupVideo[0]) {
+        $popupVideo.hide()[0].pause();
+        $popupVideo[0].currentTime = 0;
+    }
+    $popupImg.hide();
+    $popupIframe.hide().attr('src', '');
+
+    if (video.length && video.attr('src')) {
+        $popupVideo.attr('src', video.attr('src')).show();
+        $popupVideo[0].play();
+
+    } else if (img.length) {
+        $popupImg.attr('src', img.attr('src')).show();
+
+    } else if (iframe.length) {
+        $popupIframe.attr('src', iframe.attr('src')).show();
+    }
+
+    $popup.addClass('on');
+});
 
 
     /* =========================

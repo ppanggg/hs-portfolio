@@ -174,71 +174,124 @@ $(function () {
         }
     });
 
+    /* ===============================
+   7. slider2 hover video play
+   =============================== */
+   $('.slider2 .swiper-slide').on('mouseenter', function () {
+    const video = $(this).find('video')[0];
+    if (video) {
+        video.play().catch(() => {});
+    }});
+
+    $('.slider2 .swiper-slide').on('mouseleave', function () {
+    const video = $(this).find('video')[0];
+    if (video) {
+        video.pause();
+        video.currentTime = 0;
+    }});
 
     /* ===============================
-       7. 갤러리 (영상 + 팝업)
+    POPUP (video + iframe 통합
     =============================== */
-    $('.gallery-collection .swiper-slide').each(function () {
+    
+    function openPopup2($item) {
+        const popup = $('.popup');
+        const media = popup.find('.popup-media');
+    
+        media.empty();
+    
+        popup.find('h2').text($item.find('h3').text());
+        popup.find('p').text($item.find('p').text());
+    
+        const video = $item.find('video');
+        const iframe = $item.find('iframe');
+        const img = $item.find('img');
+    
+        // VIDEO
+        if (video.length) {
+            media.html(`
+                <video muted playsinline controls>
+                    <source src="${video.attr('src')}" type="video/mp4">
+                </video>
+            `);
+    
+            setTimeout(() => {
+                const v = media.find('video')[0];
+                if (v) v.play().catch(() => {});
+            }, 50);
+        }
+    
+        // IFRAME
+        else if (iframe.length) {
+            const src = iframe.attr('src');
+    
+            media.html(`
+                <iframe 
+                    src="${src}${src.includes('?') ? '&' : '?'}autoplay=1&mute=1"
+                    allow="autoplay; fullscreen"
+                    allowfullscreen>
+                </iframe>
+            `);
+        }
+    
+        // IMAGE
+        else if (img.length) {
+            media.html(`<img src="${img.attr('src')}" />`);
+        }
+    
+        popup.addClass('on');
+    }
 
-        const $slide = $(this);
-        const video = $slide.find('video')[0];
+    function openPopup1($item) {
+        const popup = $('.popup1');
+        const media = popup.find('.popup-media');
+    
+        media.empty();
+    
+        popup.find('h2').text($item.find('h3').text());
+        popup.find('p').text($item.find('p').text());
+    
+        const img = $item.find('img');
+    
+        if (img.length) {
+            media.html(`<img src="${img.attr('src')}" />`);
+        }
+    
+        popup.addClass('on');
+    }
 
-        $slide.on('mouseenter touchstart', () => video?.play());
+    // 슬라이더2 팝업
+    $('.slider2 .swiper-slide').on('click', function () {
+    openPopup2($(this));});
 
-        $slide.on('mouseleave touchend', () => {
-            if (video) {
-                video.pause();
-                video.currentTime = 0;
-            }
-        });
 
-        $slide.on('click', function () {
 
-            const popup = $('.popup');
-            const videoEl = popup.find('video')[0];
+    // ⭐ 슬라이더1 수정 (여기에 넣기!)
+    $('.slider1 .swiper-slide').on('click', function (e) {
 
-            popup.find('h2').html($slide.find('h3').html());
-            popup.find('p').html($slide.find('p').html());
+    // a 태그 클릭이면 팝업 막기
+    if ($(e.target).closest('a').length > 0) return;
 
-            if (videoEl) {
-                videoEl.src = $slide.find('video').attr('src');
-                videoEl.play();
-            }
+    openPopup1($(this));});
 
-            popup.addClass('on');
-        });
-    });
-
+    /* ===============================
+    팝업 닫기
+    =============================== */
     $('.popup button').on('click', function () {
+
         const video = $('.popup video')[0];
         if (video) {
             video.pause();
             video.currentTime = 0;
         }
+    
         $('.popup').removeClass('on');
+        $('.popup-media').empty();
     });
-
-
-    /* ===============================
-       8. slider1 팝업
-    =============================== */
-    $('.slider1 .swiper-slide').on('click', function (e) {
-
-        if ($(this).find('a').length) return;
-
-        e.preventDefault();
-
-        const popup = $('.popup1');
-
-        popup.find('h2').html($(this).find('h3').html());
-        popup.find('p').html($(this).find('p').html());
-        popup.find('img').attr('src', $(this).find('img').attr('src'));
-
-        popup.addClass('on');
-    });
-
+    
     $('.popup1 button').on('click', function () {
         $('.popup1').removeClass('on');
+        $('.popup1-media').empty();
     });
 
 

@@ -947,6 +947,7 @@ main {
     transform: scale(1.05);
     transition: all 0.35s ease;
     padding: 5vh 5vw;
+    overflow: hidden;
 }
 
 .popup1.on {
@@ -999,14 +1000,21 @@ main {
     text-align: left;
 }
 
-.popup1 img {
+.popup1 .popup-media img {
     width: 100%;
-    max-height: 80vh;
+    max-height: 60vh;
+    object-fit: contain;
     border-radius: 12px;
-    border: 1px solid rgba(120,120,255,0.3);
-    box-shadow:
-        0 0 30px rgba(120,120,255,0.2);
-    background: black;
+    border: 1px solid rgba(176, 120, 255, 0.3);
+    box-shadow: 0 0 30px rgba(176, 120, 255, 0.2);
+    background: rgba(255,255, 255, 0);
+}
+.popup1 .popup-media {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
 }
 
 .popup1 button {
@@ -1141,6 +1149,8 @@ main {
 }
 .slider2 .swiper-slide {
     position: relative;
+    aspect-ratio: 16 / 9;
+    height: auto;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -1163,6 +1173,23 @@ main {
 }
 .slider2 .swiper-slide:hover video {
     opacity: 1;
+}
+.slider2 .swiper-slide iframe {
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.slider2 .swiper-slide iframe,
+.slider2 .swiper-slide video {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    position: absolute;
+    inset: 0;
 }
 
 .slider2 .swiper-slide h3,
@@ -1198,7 +1225,7 @@ main {
     background-color: rgb(192, 194, 255);
 }
 .slider2 .swiper-wrapper .t video {
-    transform: translate(-43%, -35%) scale(0.4);
+    transform: translate(0%, 100%) scale(3);
     transform-origin: center;
     object-fit: cover;
     display: block;
@@ -1208,7 +1235,7 @@ main {
     background-color: rgb(192, 194, 255);
 }
 .slider2 .swiper-wrapper .th video {
-    transform: translate(-36%, -30%) scale(0.4);
+    transform: translate(0%, 10%) scale(1.2);
     transform-origin: center;
     object-fit: cover;
     display: block;
@@ -1307,6 +1334,25 @@ main {
     line-height: 1.6;
 }
 
+.popup .popup-media {
+    width: 100%;
+    max-height: 70vh;
+    aspect-ratio: 16 / 9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    border-radius: 12px;
+    background: black;
+}
+.popup .popup-media video,
+.popup .popup-media iframe{
+    width: 100%;
+    height: 100%;
+    border: none;
+    object-fit: contain;
+}
+
 .popup video {
     width: 100%;
     max-height: 60vh;
@@ -1315,6 +1361,24 @@ main {
     box-shadow:
         0 0 30px rgba(120,120,255,0.2);
     background: black;
+}
+.popup iframe {
+    width: 100%;
+    height: 50vh;
+    max-height: 60vh;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 120, 120, 0.3);
+    box-shadow:
+        0 0 30px rgba(255, 120, 120, 0.2);
+    background: rgba(255,255, 255, 0);
+}
+.popup video,
+.popup iframe {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    height: auto;
+    max-height: 80vh;
+    border-radius: 12px;
 }
 
 .popup button {
