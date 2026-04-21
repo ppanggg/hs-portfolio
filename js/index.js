@@ -201,7 +201,7 @@ $(function () {
         media.empty();
     
         popup.find('h2').text($item.find('h3').text());
-        popup.find('p').text($item.find('p').text());
+        popup.find('p').html($item.find('p').html());
     
         const video = $item.find('video');
         const iframe = $item.find('iframe');
@@ -249,7 +249,7 @@ $(function () {
         media.empty();
     
         popup.find('h2').text($item.find('h3').text());
-        popup.find('p').text($item.find('p').text());
+        popup.find('p').html($item.find('p').html());
     
         const img = $item.find('img');
     
