@@ -455,10 +455,10 @@
         transform: translate(-42%, -35%) scale(0.5);
     }
     .slider2 .swiper-wrapper .t video {
-        transform: translate(-42%, -30%) scale(0.5);
+        transform: translate(-0%, 100%) scale(3);
     }
     .slider2 .swiper-wrapper .th video {
-        transform: translate(-42%, -35%) scale(0.5);
+        transform: translate(0%, 0%) scale(1);
     }
     
     
@@ -481,7 +481,6 @@
     .popup-panel,
     .popup1-panel {
         width: 95vw;
-        padding: 1rem;
     }
 
     footer {

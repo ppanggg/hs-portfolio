@@ -1424,7 +1424,7 @@ main {
     content: "";
     position: absolute;
     inset: 0;
-    background: url('../image/index/graphics/50_00043.jpg') center/cover no-repeat;
+    background: url('../image/index/graphics/50_00001.jpg') center/cover no-repeat;
     opacity: 0.3;
     z-index: 0;
     pointer-events: none;
