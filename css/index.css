@@ -1272,7 +1272,10 @@ main {
     cursor: pointer;
 }
 .slider2 .swiper-wrapper .fi {
-    background: #140a2d url('../image/index/graphics/dan.png') center / cover no-repeat;
+    background-color: rgb(192, 194, 255);
+}
+.slider2 .swiper-wrapper .fi video {
+    transform: scale(1.2);
 }
 
 .swiper-pagination {
