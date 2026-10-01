@@ -33,25 +33,66 @@
     <script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>
     <script src="https://kit.fontawesome.com/ba5e955305.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-    <script src="js/index.js"></script>
 </head>
 <body>
     <div id="loader">
+        <video
+            class="loader-video" autoplay muted loop playsinline preload="auto">
+            <source src="./image/index/video/loader.mp4" type="video/mp4">
+        </video>
+    
+        <div class="video-overlay"></div>
+        <div class="noise"></div>
+    
         <div class="left-progress">
-          <div class="progress-bar"></div>
-          <div class="percent-text">0%</div>
+            <span class="progress-label">SYSTEM</span>
+    
+            <div class="progress-track">
+                <div class="progress-bar"></div>
+            </div>
+    
+            <div class="percent-text">0%</div>
         </div>
+    
         <div class="right-content">
-            <h1>Initializing</h1>
-            <p>preparing experience...</p>
+            <div class="version">VER. 1.0.24</div>
+    
+            <h1>
+                INITIALIZING
+            </h1>
+    
+            <p id="loading-status">
+                Preparing experience...
+            </p>
+    
+            <div class="system-info">
+                <span>MEMORY</span>
+                <span>OK</span>
+            </div>
+    
+            <div class="system-info">
+                <span>CONNECTION</span>
+                <span>STABLE</span>
+            </div>
         </div>
+    
+        <div class="corner-text">
+            copyright &copy;2026 Jung Hey-su portfolio, All right reserved.
+        </div>
+
+        <div class="split-curtain">
+        <div class="split-left"></div>
+        <div class="split-right"></div>
+        <div class="split-line"></div></div>
+
     </div>
+
     <header class="menu">
         <h2 class="logo">HYPE</h2>
         <ul class="mainmenu">
             <li data-target="main"><a href="#main">MAIN</a></li>
             <li data-target="profile"><a href="#profile">PROFILE</a></li>
-            <li data-target="portfolio"><a href="#protfolio">PORTFOLIO</a></li>
+            <li data-target="portfolio"><a href="#portfolio">PORTFOLIO</a></li>
             <li data-target="contact"><a href="#contact">CONTACT</a></li>
         </ul>
         <div class="icon">
@@ -338,5 +379,8 @@
           preventClicksPropagation: false,
         });
     </script>
+
+    <script src="js/index.js"></script>
+
 </body>
 </html>

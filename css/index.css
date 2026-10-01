@@ -4,7 +4,6 @@
     font-family: 'title';
     src: url('../fonts/SB\ 어그로\ B.ttf');
 }
-
 @font-face {
     font-family: 'ko';
     src: url(../fonts/Paperlogy-4Regular.ttf);
@@ -24,6 +23,15 @@
     src: url(../fonts/Tenada.ttf);
 }
 
+@font-face {
+    font-family: 'loader-font';
+    src: url(../fonts/KBO\ Dia\ Gothic_bold.ttf);
+}
+
+@font-face {
+    font-family: 'loader-font-light';
+    src: url(../fonts/KBO\ Dia\ Gothic_light.ttf);
+}
 /* ------------------------------------------- */
 
 html, body {
@@ -71,6 +79,8 @@ body.loading {
 
 /* ------------------------------------------- */
 
+/* ------------------------------------------- */
+
 .menu {
     display: flex;
     flex-direction: column;
@@ -89,12 +99,10 @@ body.loading {
     flex-grow: 1;
     margin-top: 50px;
     font-family: 'logo';
-    letter-spacing: 1px;
-    font-size: 2rem;
+    width: 50px;
+    height: 50px;
 }
-.logo::first-letter {
-    color: #6a5dff;
-}
+
 
 .menu ul {
     list-style: none;
@@ -1582,73 +1590,499 @@ footer p{
 
 #loader {
     position: fixed;
-    top:0; left:0;
-    width: 100vw; height: 100vh;
-    display: flex;
-    background: #121212;
-    color: #4c3cf6;
-    font-family: 'ko';
+    inset: 0;
     z-index: 9999;
-    transform: translateY(0);
+    transition: background .25s ease;
+    display: flex;
+    align-items: center;
+
+    overflow: hidden;
+
+    color: var(--text-light);
+
+    background:
+        radial-gradient(
+            circle at 70% 40%,
+            rgba(106, 93, 255, 0.18),
+            transparent 35%
+        ),
+        linear-gradient(
+            135deg,
+            var(--bg-darker),
+            var(--bg-dark)
+        );
+
+    font-family: Arial, sans-serif;
+
 }
 
-#loader.exiting {
-    transform: translateY(100vh) scale(0.98);
-    filter: blur(1px);
-    transition: transform 1s cubic-bezier(0.7,0,0.2,1), filter 1s ease;
+.loader-video {
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    opacity: 0.3;
+    transform: translate(-50%, -50%);
+
+    z-index: 0;
+
+    pointer-events: none;
 }
-  
+
+.video-overlay {
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 1;
+
+    background:radial-gradient(
+        ellipse at center,
+        transparent 15%,
+        rgba(26, 20, 56, .25) 55%,
+        rgba(10, 7, 25, .9) 100%
+        ),
+        linear-gradient(
+        90deg,
+        rgba(26, 20, 56, .8),
+        rgba(42, 36, 80, .15) 50%,
+        rgba(26, 20, 56, .7)
+        );
+        
+    pointer-events: none;
+}
+
+.left-progress,.right-content,.corner-text {
+    position: relative;
+    z-index: 3;
+}
+
+/* =========================
+   CRT SCANLINE
+========================= */
+
+#loader::after {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+    z-index: 4;
+
+    pointer-events: none;
+
+    background: repeating-linear-gradient(
+        0deg,
+        rgba(255,255,255,.025) 0px,
+        rgba(255,255,255,.025) 1px,
+        transparent 1px,
+        transparent 4px
+    );
+}
+
+#loader.loaded .right-content,
+#loader.loaded .left-progress {
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: .5s ease;
+}
+
+
+/* =========================
+   NOISE
+========================= */
+
+.noise {
+    position: absolute;
+    inset: -50%;
+    z-index: 2;
+    opacity: .035;
+
+    pointer-events: none;
+
+    background-image: url("noise.png");
+
+    animation: noiseMove .2s steps(2) infinite;
+}
+
+@keyframes noiseMove {
+    0% {
+        transform: translate(0, 0);
+    }
+
+    25% {
+        transform: translate(2%, -1%);
+    }
+
+    50% {
+        transform: translate(-1%, 2%);
+    }
+
+    75% {
+        transform: translate(1%, 1%);
+    }
+
+    100% {
+        transform: translate(0, 0);
+    }
+}
+
+
+/* =========================
+   LEFT PROGRESS
+========================= */
+
 .left-progress {
     position: relative;
-    width: 40px;
-    height: 100%;
-    background: #121212;
-    justify-content: center;
-    box-sizing: border-box;
-}
-  
-.progress-bar {
-    position: absolute;
-    left: 25px; top: 0;
-    width: 30px;
-    height: 0%;
-    background: linear-gradient(180deg, #13069e, #4c3cf6);
-    transition: height 0.05s cubic-bezier(0.7, 0, 0.2, 1);
-}
-  
-.percent-text {
-    position: absolute;
-    left: 60px; top: 0px;
-    color: #4c3cf6;
-    font-weight: bold;
-    font-size: 1.3rem;
-    user-select: none;
-    transition: top 0.05s linear;
-    transform: translateY(-100%);
-    white-space: nowrap;
-}
-  
-.right-content {
-    flex-grow: 1;
+
+    width: 90px;
+    height: 70vh;
+
+    margin-left: 8vw;
+
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-end;
-    color: white;
-    text-align: right;
-    padding-right: 60px;
-    background: #121212;
-}
-  
-.right-content h1 {
-    font-size: 4rem;
-    font-family: 'logo';
-    color: #ccc;
+    align-items: flex-start;
 }
 
-.right-content p {
-    font-size: 1rem;
-    color: #ccc;
-    font-family: 'ko';
+
+/* SYSTEM */
+
+.progress-label {
+    position: absolute;
+
+    top: -25px;
+    left: -2px;
+
+    font-family: 'loader-font-light';
+    font-size: 10px;
+
+    letter-spacing: .25em;
+
+    color: var(--main-light);
+}
+
+
+/* 바탕 */
+
+.progress-track {
+    position: relative;
+
+    width: 2px;
+    height: 100%;
+
+    background: rgba(162, 155, 255, .15);
+
+    overflow: hidden;
+}
+
+
+/* 실제 로딩바 */
+
+.progress-bar {
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 0%;
+
+    background: linear-gradient(
+        to bottom,
+        var(--main-light),
+        var(--main-color),
+        var(--main-dark)
+    );
+
+    box-shadow:
+        0 0 8px var(--main-color),
+        0 0 20px rgba(106, 93, 255, .65),
+        0 0 40px rgba(106, 93, 255, .3);
+}
+
+
+/* 퍼센트 */
+
+.percent-text {
+    position: absolute;
+
+    left: 18px;
+    top: 0;
+
+    font-family: 'loader-font';
+    font-size: 13px;
+
+    color: var(--main-light);
+
+    white-space: nowrap;
+
+    text-shadow:
+        0 0 8px rgba(106, 93, 255, .8);
+}
+
+
+/* =========================
+   RIGHT CONTENT
+========================= */
+
+.right-content {
+    position: relative;
+    z-index: 2;
+    
+    margin-left: 5vw;
+}
+
+
+.version {
+    margin-bottom: 20px;
+
+    font-family: 'loader-font-light';
+    font-size: 11px;
+
+    letter-spacing: .2em;
+
+    color: rgba(229, 222, 255, .4);
+}
+
+
+.right-content h1 {
+    margin: 0;
+
+    font-size: clamp(40px, 6vw, 90px);
+    font-weight: 700;
+    font-family: 'loader-font';
+    letter-spacing: -.04em;
+
+    color: rgba(255, 255, 255, 0.85);
+}
+
+@keyframes blink {
+    50% {
+        opacity: .2;
+    }
+}
+
+
+#loading-status {
+    margin-top: 12px;
+
+    color: rgba(229, 222, 255, .5);
+
+    transition: opacity .25s ease, transform .25s ease;
+    font-family: 'loader-font-light';
+    font-size: 13px;
+
+    text-transform: uppercase;
+}
+
+
+/* =========================
+   SYSTEM INFO
+========================= */
+
+.system-info {
+    display: flex;
+
+    gap: 30px;
+
+    margin-top: 8px;
+
+    font-family: monospace;
+    font-size: 10px;
+
+    color: rgba(229, 222, 255, .3);
+}
+
+
+.system-info span:last-child {
+    color: var(--main-light);
+}
+
+
+/* =========================
+   CORNER
+========================= */
+
+.corner-text {
+    position: absolute;
+
+    right: 30px;
+    bottom: 25px;
+
+    font-family: monospace;
+    font-size: 9px;
+
+    letter-spacing: .15em;
+
+    color: rgba(229, 222, 255, .25);
+}
+
+/* =========================
+   SPLIT CURTAIN
+========================= */
+
+.split-curtain {
+    position: absolute;
+    inset: 0;
+    z-index: 20;
+    pointer-events: none;
+}
+
+
+/* 패널 */
+
+.split-left,
+.split-right {
+    position: absolute;
+
+    top: 0;
+
+    width: 50%;
+    height: 100%;
+
+    background-image: url('../image/index/graphics/6397248_3284182\ copy2.jpg');
+    background-repeat: no-repeat;
+    background-size: 200% 100%;
+
+    background-blend-mode: multiply;
+
+    will-change: transform;
+
+    transition:
+        transform 1.1s cubic-bezier(.76, 0, .24, 1);
+}
+
+
+/* 처음에는 양쪽 바깥 */
+
+.split-left {
+    left: 0;
+
+    background-position: left center;
+
+    transform: translate3d(-100%, 0, 0);
+}
+
+.split-right {
+     right: 0;
+
+    background-position: right center;
+
+    transform: translate3d(100%, 0, 0);
+}
+
+
+/* =========================
+   중앙으로 닫힘
+========================= */
+
+#loader.curtain-active .split-left {
+    transform: translate3d(0, 0, 0);
+}
+
+#loader.curtain-active .split-right {
+    transform: translate3d(0, 0, 0);
+}
+
+
+/* =========================
+   중앙에서 좌우로 열림
+========================= */
+
+#loader.is-opening .split-left {
+    transform: translate3d(-100%, 0, 0);
+}
+
+#loader.is-opening .split-right {
+    transform: translate3d(100%, 0, 0);
+}
+
+
+/* =========================
+   CENTER LINE
+========================= */
+
+.split-line {
+    position: absolute;
+
+    top: 0;
+    left: 50%;
+
+    width: 1px;
+    height: 100%;
+
+    z-index: 21;
+
+    background: var(--main-light);
+
+    box-shadow:
+        0 0 8px var(--main-light),
+        0 0 20px var(--main-color),
+        0 0 50px rgba(106, 93, 255, .7);
+
+    opacity: 0;
+
+    transform:
+        translateX(-50%)
+        scaleY(0);
+
+    transform-origin: center;
+
+    transition:
+        opacity .2s ease,
+        transform .4s ease;
+}
+
+
+/* 중앙선 등장 */
+
+#loader.line-active .split-line {
+    opacity: 1;
+
+    transform:
+        translateX(-50%)
+        scaleY(1);
+}
+
+
+/* =========================
+   커튼이 열리기 시작하면
+   중앙선도 동시에 사라짐
+========================= */
+
+#loader.is-opening {
+    background: transparent;
+}
+
+
+#loader.is-opening .split-line {
+    opacity: 0;
+    transform:
+        translateX(-50%)
+        scaleY(0);
+
+    transition:
+        opacity .25s ease,
+        transform .25s ease;
+}
+
+#loader.is-opening .loader-video,
+#loader.is-opening .video-overlay,
+#loader.is-opening .noise,
+#loader.is-opening .left-progress,
+#loader.is-opening .right-content,
+#loader.is-opening .corner-text {
+    opacity: 0;
+    transition: opacity .25s ease;
+}
+
+#loader.is-opening::after {
+    opacity: 0;
+    transition: opacity .25s ease;
 }
 

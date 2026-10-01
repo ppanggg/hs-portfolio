@@ -57,14 +57,13 @@ $(function () {
                 .addClass('active');
         }
     });
-
+    
     if (scrollTop > 300) {
         $('.gotop').stop(true, true).fadeIn();
     } else {
         $('.gotop').stop(true, true).fadeOut();
-    }
-});
-
+    }});
+    
 
     /* ===============================
        3. gotop
@@ -298,41 +297,125 @@ $(function () {
     /* ===============================
        9. 로딩 애니메이션
     =============================== */
+    const loader = document.getElementById('loader');
     const progressBar = document.querySelector('.progress-bar');
     const percentText = document.querySelector('.percent-text');
-    const loader = document.getElementById('loader');
-    const main = document.getElementById('main');
     const container = document.querySelector('.left-progress');
-
-    let value = 0;
-    const speed = 0.9;
-
-    function animateLoader() {
-        value = Math.min(value + speed, 100);
-
-        progressBar.style.height = value + '%';
-        percentText.textContent = Math.floor(value) + '%';
-
-        const barEnd =
-            progressBar.getBoundingClientRect().bottom -
-            container.getBoundingClientRect().top + 6;
-
-        percentText.style.top = barEnd + 'px';
-        percentText.style.transform = 'translateY(-100%)';
-
-        if (value < 100) {
-            requestAnimationFrame(animateLoader);
-        } else {
-            loader.style.transform = 'translateY(100vh)';
-            loader.style.transition = 'transform 1s cubic-bezier(0.7,0,0.2,1)';
-
-            setTimeout(() => {
-                loader.style.display = 'none';
-                main.style.opacity = '1';
-            }, 1000);
+    const statusText = document.getElementById('loading-status');
+    const main = document.getElementById('main');
+    
+    if (!loader || !progressBar || !percentText || !container || !statusText) {
+        console.error('LOADER ELEMENT NOT FOUND');
+    } else {
+    
+        let value = 0;
+    
+        const statuses = [
+            [0, 'Preparing experience...'],
+            [20, 'Loading assets...'],
+            [45, 'Synchronizing data...'],
+            [65, 'Initializing character...'],
+            [82, 'Establishing connection...'],
+            [95, 'Entering world...']
+        ];
+    
+    
+        function updateStatus(value) {
+    
+            let current = statuses[0][1];
+            for (const [threshold, text] of statuses) {
+                if (value >= threshold) {
+                    current = text;
+                }
+            }
+    
+    
+            if (statusText.textContent !== current) {
+                statusText.style.opacity = '0';
+                statusText.style.transform = 'translateY(4px)';
+                setTimeout(function () {
+                    statusText.textContent = current;
+                    statusText.style.opacity = '1';
+                    statusText.style.transform = 'translateY(0)';
+                }, 120);
+            }
         }
-    }
+    
+    
+        function animateLoader() {
+            const remaining = 100 - value;
+            const speed = Math.max(
+                0.08,
+                remaining * 0.015
+            );
+            value += speed;
+            if (value > 100) {
+                value = 100;
+            }
+            progressBar.style.height =
+                value + '%';
+            percentText.textContent =
+                Math.floor(value) + '%';
+            const barEnd =
+                progressBar.getBoundingClientRect().bottom -
+                container.getBoundingClientRect().top;
+    
+            percentText.style.top =
+                barEnd + 'px';
+    
+            percentText.style.transform =
+                'translateY(-100%)';
+            updateStatus(value);
+    
+            if (value < 100) {
+                requestAnimationFrame(animateLoader);
+            } else {
+                finishLoader();
+            }
+        }
+    
+        function finishLoader() {
+            // 1. WELCOME
+            statusText.textContent = 'WELCOME.';
+        
+            setTimeout(function () {
+        
+                // 2. 커튼 중앙으로 닫기
+                loader.classList.add('curtain-active');
+        
+                // 3. 커튼 완전히 닫힘
+                setTimeout(function () {
+        
+                    // 4. 중앙선 등장
+                    loader.classList.add('line-active');
+        
+                    // 5. 중앙선 + 완전히 닫힌 커튼 유지
+                    setTimeout(function () {
+        
+                        // 6. 메인 화면을 뒤에서 준비
+                        main.style.opacity = '1';
+        
+                        // 7. 중앙선 제거 + 커튼 좌우로 열기
+                        loader.classList.add('is-opening');
+        
+                        // 8. 커튼 완전히 열린 뒤 loader 제거
+                        setTimeout(function () {
+        
+                            loader.style.display = 'none';
+                            document.body.classList.remove('loading');
+        
+                        }, 1200);
+        
+                    }, 300);
+        
+                }, 1200);
+        
+            }, 600);
+        }
 
-    animateLoader();
+        // ★ 로딩 시작
+        animateLoader();
+
+    }
 
 });
