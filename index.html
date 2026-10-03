@@ -37,33 +37,27 @@
 <body>
     <div id="loader">
         <video
-            class="loader-video" autoplay muted loop playsinline preload="auto">
+            class="loader-video"  autoplay muted loop playsinline preload="auto">
+    
             <source src="./image/index/video/loader.mp4" type="video/mp4">
         </video>
-    
+
         <div class="video-overlay"></div>
+    
         <div class="noise"></div>
-    
-        <div class="left-progress">
-            <span class="progress-label">SYSTEM</span>
-    
-            <div class="progress-track">
-                <div class="progress-bar"></div>
-            </div>
-    
-            <div class="percent-text">0%</div>
-        </div>
+
+        <!-- =========================================
+             RIGHT CONTENT
+        ========================================== -->
     
         <div class="right-content">
+    
             <div class="version">VER. 1.0.24</div>
     
-            <h1>
-                INITIALIZING
-            </h1>
+            <h1>INITIALIZING</h1>
     
-            <p id="loading-status">
-                Preparing experience...
-            </p>
+            <p id="loading-status">Preparing experience...</p>
+    
     
             <div class="system-info">
                 <span>MEMORY</span>
@@ -74,21 +68,60 @@
                 <span>CONNECTION</span>
                 <span>STABLE</span>
             </div>
+    
         </div>
     
+    
+        <!-- =========================================
+             BOTTOM PROGRESS
+        ========================================== -->
+    
+        <div class="bottom-progress">
+            <div class="progress-meta">
+                <span class="progress-label">SYSTEM</span>
+                <span class="percent-text">0%</span>
+            </div>
+        
+            <div class="progress-track">
+                <div class="progress-bar"></div>
+            </div>
+            
+        </div>
+    
+        <!-- =========================================
+             COPYRIGHT
+        ========================================== -->
+    
+        <div class="corner-text">
+    
+            copyright &copy;2026 Jung Hey-su portfolio,
+            All right reserved.
+    
+        </div>
+    
+    
+        <!-- =========================================
+             PAGE TRANSITION
+        ========================================== -->
+    
+        <div class="page-transition"></div>
+    
+    </div>
+
+
+    
+        <!-- CORNER -->
         <div class="corner-text">
             copyright &copy;2026 Jung Hey-su portfolio, All right reserved.
         </div>
-
-        <div class="split-curtain">
-        <div class="split-left"></div>
-        <div class="split-right"></div>
-        <div class="split-line"></div></div>
-
+    
+        <!-- PAGE TRANSITION -->
+        <div class="page-transition"></div>
     </div>
 
     <header class="menu">
-        <h2 class="logo">HYPE</h2>
+        <h2 class="logo">DIGITAL PORTFOLIO<br><span>VER. 10.04.26</span></h2>
+
         <ul class="mainmenu">
             <li data-target="main"><a href="#main">MAIN</a></li>
             <li data-target="profile"><a href="#profile">PROFILE</a></li>
@@ -114,7 +147,9 @@
             </ul>
         </div>
     </header>
+
     <a href="#" class="gotop"><span></span></a>
+
     <main>
         <section id="main" class="page1">
             <video class="bg-video" autoplay muted loop playsinline>

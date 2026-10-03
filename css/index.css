@@ -79,8 +79,6 @@ body.loading {
 
 /* ------------------------------------------- */
 
-/* ------------------------------------------- */
-
 .menu {
     display: flex;
     flex-direction: column;
@@ -96,11 +94,28 @@ body.loading {
 }
 
 .logo {
+    opacity: 0;
     flex-grow: 1;
     margin-top: 50px;
-    font-family: 'logo';
-    width: 50px;
-    height: 50px;
+
+    width: auto;
+    height: auto;
+
+    font-size: 20px;
+    line-height: 1.3;
+    letter-spacing: .08em;
+}
+
+.logo span {
+    display: inline-block;
+
+    margin-top: 4px;
+
+    font-size: 7px;
+    font-weight: 400;
+
+    letter-spacing: .12em;
+
 }
 
 
@@ -1588,12 +1603,19 @@ footer p{
 
 /* ------------------------------------------- */
 
+/* =====================================================
+   LOADER
+===================================================== */
+
 #loader {
     position: fixed;
+
     inset: 0;
+
     z-index: 9999;
-    transition: background .25s ease;
+
     display: flex;
+
     align-items: center;
 
     overflow: hidden;
@@ -1614,7 +1636,13 @@ footer p{
 
     font-family: Arial, sans-serif;
 
+    isolation: isolate;
 }
+
+
+/* =====================================================
+   VIDEO
+===================================================== */
 
 .loader-video {
     position: absolute;
@@ -1627,13 +1655,23 @@ footer p{
 
     object-fit: cover;
 
-    opacity: 0.3;
-    transform: translate(-50%, -50%);
+    opacity: .3;
+
+    transform:
+        translate(-50%, -50%);
 
     z-index: 0;
 
     pointer-events: none;
+
+    transition:
+        opacity .35s ease;
 }
+
+
+/* =====================================================
+   VIDEO OVERLAY
+===================================================== */
 
 .video-overlay {
     position: absolute;
@@ -1642,75 +1680,55 @@ footer p{
 
     z-index: 1;
 
-    background:radial-gradient(
-        ellipse at center,
-        transparent 15%,
-        rgba(26, 20, 56, .25) 55%,
-        rgba(10, 7, 25, .9) 100%
+    background:
+        radial-gradient(
+            ellipse at center,
+            transparent 15%,
+            rgba(26, 20, 56, .25) 55%,
+            rgba(10, 7, 25, .9) 100%
         ),
         linear-gradient(
-        90deg,
-        rgba(26, 20, 56, .8),
-        rgba(42, 36, 80, .15) 50%,
-        rgba(26, 20, 56, .7)
+            90deg,
+            rgba(26, 20, 56, .8),
+            rgba(42, 36, 80, .15) 50%,
+            rgba(26, 20, 56, .7)
         );
-        
-    pointer-events: none;
-}
-
-.left-progress,.right-content,.corner-text {
-    position: relative;
-    z-index: 3;
-}
-
-/* =========================
-   CRT SCANLINE
-========================= */
-
-#loader::after {
-    content: "";
-
-    position: absolute;
-    inset: 0;
-    z-index: 4;
 
     pointer-events: none;
 
-    background: repeating-linear-gradient(
-        0deg,
-        rgba(255,255,255,.025) 0px,
-        rgba(255,255,255,.025) 1px,
-        transparent 1px,
-        transparent 4px
-    );
-}
-
-#loader.loaded .right-content,
-#loader.loaded .left-progress {
-    opacity: 0;
-    transform: translateY(-10px);
-    transition: .5s ease;
+    transition:
+        opacity .35s ease;
 }
 
 
-/* =========================
+/* =====================================================
    NOISE
-========================= */
+===================================================== */
 
 .noise {
     position: absolute;
+
     inset: -50%;
+
     z-index: 2;
+
     opacity: .035;
 
     pointer-events: none;
 
-    background-image: url("noise.png");
+    background-image:
+        url("noise.png");
 
-    animation: noiseMove .2s steps(2) infinite;
+    animation:
+        noiseMove .2s steps(2) infinite;
+
+    transition:
+        opacity .35s ease;
 }
 
+
 @keyframes noiseMove {
+
     0% {
         transform: translate(0, 0);
     }
@@ -1730,162 +1748,112 @@ footer p{
     100% {
         transform: translate(0, 0);
     }
+
 }
 
 
-/* =========================
-   LEFT PROGRESS
-========================= */
+/* =====================================================
+   SCANLINE
+===================================================== */
 
-.left-progress {
-    position: relative;
+#loader::after {
+    content: "";
 
-    width: 90px;
-    height: 70vh;
-
-    margin-left: 8vw;
-
-    display: flex;
-    align-items: flex-start;
-}
-
-
-/* SYSTEM */
-
-.progress-label {
     position: absolute;
 
-    top: -25px;
-    left: -2px;
+    inset: 0;
 
-    font-family: 'loader-font-light';
-    font-size: 10px;
+    z-index: 4;
 
-    letter-spacing: .25em;
+    pointer-events: none;
 
-    color: var(--main-light);
+    background:
+        repeating-linear-gradient(
+            0deg,
+            rgba(255,255,255,.025) 0px,
+            rgba(255,255,255,.025) 1px,
+            transparent 1px,
+            transparent 4px
+        );
+
+    transition:
+        opacity .3s ease;
 }
 
 
-/* 바탕 */
-
-.progress-track {
-    position: relative;
-
-    width: 2px;
-    height: 100%;
-
-    background: rgba(162, 155, 255, .15);
-
-    overflow: hidden;
-}
-
-
-/* 실제 로딩바 */
-
-.progress-bar {
-    position: absolute;
-
-    top: 0;
-    left: 0;
-
-    width: 100%;
-    height: 0%;
-
-    background: linear-gradient(
-        to bottom,
-        var(--main-light),
-        var(--main-color),
-        var(--main-dark)
-    );
-
-    box-shadow:
-        0 0 8px var(--main-color),
-        0 0 20px rgba(106, 93, 255, .65),
-        0 0 40px rgba(106, 93, 255, .3);
-}
-
-
-/* 퍼센트 */
-
-.percent-text {
-    position: absolute;
-
-    left: 18px;
-    top: 0;
-
-    font-family: 'loader-font';
-    font-size: 13px;
-
-    color: var(--main-light);
-
-    white-space: nowrap;
-
-    text-shadow:
-        0 0 8px rgba(106, 93, 255, .8);
-}
-
-
-/* =========================
+/* =====================================================
    RIGHT CONTENT
-========================= */
+===================================================== */
 
 .right-content {
     position: relative;
-    z-index: 2;
-    
-    margin-left: 5vw;
+
+    z-index: 3;
+
+    margin-left: 8vw;
 }
 
 
 .version {
     margin-bottom: 20px;
 
-    font-family: 'loader-font-light';
+    font-family:
+        'loader-font-light';
+
     font-size: 11px;
 
     letter-spacing: .2em;
 
-    color: rgba(229, 222, 255, .4);
+    color:
+        rgba(229,222,255,.4);
 }
 
 
 .right-content h1 {
+
     margin: 0;
 
-    font-size: clamp(40px, 6vw, 90px);
+    font-size:
+        clamp(40px, 6vw, 90px);
+
     font-weight: 700;
-    font-family: 'loader-font';
+
+    font-family:
+        'loader-font';
+
     letter-spacing: -.04em;
 
-    color: rgba(255, 255, 255, 0.85);
-}
-
-@keyframes blink {
-    50% {
-        opacity: .2;
-    }
+    color:
+        rgba(255,255,255,.85);
 }
 
 
 #loading-status {
+
     margin-top: 12px;
 
-    color: rgba(229, 222, 255, .5);
+    color:
+        rgba(229,222,255,.5);
 
-    transition: opacity .25s ease, transform .25s ease;
-    font-family: 'loader-font-light';
+    font-family:
+        'loader-font-light';
+
     font-size: 13px;
 
     text-transform: uppercase;
+
+    transition:
+        opacity .25s ease,
+        transform .25s ease;
 }
 
 
-/* =========================
+/* =====================================================
    SYSTEM INFO
-========================= */
+===================================================== */
 
 .system-info {
+
     display: flex;
 
     gap: 30px;
@@ -1893,196 +1861,334 @@ footer p{
     margin-top: 8px;
 
     font-family: monospace;
+
     font-size: 10px;
 
-    color: rgba(229, 222, 255, .3);
+    color:
+        rgba(229,222,255,.3);
 }
 
 
 .system-info span:last-child {
-    color: var(--main-light);
+
+    color:
+        var(--main-light);
 }
 
 
-/* =========================
-   CORNER
-========================= */
+/* =====================================================
+   BOTTOM PROGRESS
+===================================================== */
+
+.bottom-progress {
+    position: absolute;
+    left: 0;
+    bottom: 45px;
+
+    width: 100%;
+
+    z-index: 3;
+}
+
+
+/* =====================================================
+   PROGRESS META
+===================================================== */
+
+.progress-meta {
+    padding: 0 30px;
+    margin-bottom: 10px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+/* SYSTEM */
+
+.progress-label {
+
+    font-family:
+        'loader-font-light';
+
+    font-size: 10px;
+
+    letter-spacing: .25em;
+
+    color:
+        var(--main-light);
+}
+
+
+/* PERCENT */
+
+.percent-text {
+
+    font-family:
+        'loader-font';
+
+    font-size: 11px;
+
+    letter-spacing: .08em;
+
+    color:
+        var(--main-light);
+
+    text-shadow:
+        0 0 8px
+        rgba(106,93,255,.5);
+
+    white-space: nowrap;
+}
+
+
+/* =====================================================
+   TRACK
+===================================================== */
+
+.progress-track {
+    width: 100%;
+    height: 13px;
+
+    background: rgba(255,255,255,.08);
+
+    overflow: hidden;
+}
+
+
+/* =====================================================
+   PROGRESS BAR
+===================================================== */
+
+.progress-bar {
+    width: 100%;
+    height: 100%;
+
+    transform: scaleX(0);
+    transform-origin: left center;
+
+    background: linear-gradient(
+        90deg,
+        var(--main-dark),
+        var(--main-color),
+        var(--main-light)
+    );
+}
+
+
+/* 진행 끝부분 */
+
+.progress-bar::after {
+
+    content: "";
+
+    position: absolute;
+
+    top: 50%;
+
+    right: 0;
+
+    width: 3px;
+
+    height: 10px;
+
+    transform:
+        translateY(-50%);
+
+    background:
+        var(--main-light);
+
+    box-shadow:
+        0 0 6px
+        var(--main-light),
+
+        0 0 15px
+        var(--main-color);
+}
+
+
+/* =====================================================
+   COPYRIGHT
+===================================================== */
 
 .corner-text {
+
     position: absolute;
 
     right: 30px;
+
     bottom: 25px;
 
     font-family: monospace;
+
     font-size: 9px;
 
     letter-spacing: .15em;
 
-    color: rgba(229, 222, 255, .25);
+    color:
+        rgba(229,222,255,.25);
+
+    z-index: 3;
 }
 
-/* =========================
-   SPLIT CURTAIN
-========================= */
 
-.split-curtain {
+/* =====================================================
+   LOADED
+===================================================== */
+
+#loader.loaded .right-content,
+#loader.loaded .bottom-progress,
+#loader.loaded .corner-text {
+
+    opacity: 0;
+
+    transform:
+        translateY(-10px);
+
+    transition:
+        opacity .35s ease,
+        transform .35s ease;
+}
+
+
+/* =====================================================
+   PAGE TRANSITION
+===================================================== */
+
+.page-transition {
+
     position: absolute;
+
     inset: 0;
+
     z-index: 20;
+
     pointer-events: none;
-}
 
-
-/* 패널 */
-
-.split-left,
-.split-right {
-    position: absolute;
-
-    top: 0;
-
-    width: 50%;
-    height: 100%;
-
-    background-image: url('../image/index/graphics/6397248_3284182\ copy2.jpg');
-    background-repeat: no-repeat;
-    background-size: 200% 100%;
-
-    background-blend-mode: multiply;
-
-    will-change: transform;
-
-    transition:
-        transform 1.1s cubic-bezier(.76, 0, .24, 1);
-}
-
-
-/* 처음에는 양쪽 바깥 */
-
-.split-left {
-    left: 0;
-
-    background-position: left center;
-
-    transform: translate3d(-100%, 0, 0);
-}
-
-.split-right {
-     right: 0;
-
-    background-position: right center;
-
-    transform: translate3d(100%, 0, 0);
-}
-
-
-/* =========================
-   중앙으로 닫힘
-========================= */
-
-#loader.curtain-active .split-left {
-    transform: translate3d(0, 0, 0);
-}
-
-#loader.curtain-active .split-right {
-    transform: translate3d(0, 0, 0);
-}
-
-
-/* =========================
-   중앙에서 좌우로 열림
-========================= */
-
-#loader.is-opening .split-left {
-    transform: translate3d(-100%, 0, 0);
-}
-
-#loader.is-opening .split-right {
-    transform: translate3d(100%, 0, 0);
-}
-
-
-/* =========================
-   CENTER LINE
-========================= */
-
-.split-line {
-    position: absolute;
-
-    top: 0;
-    left: 50%;
-
-    width: 1px;
-    height: 100%;
-
-    z-index: 21;
-
-    background: var(--main-light);
-
-    box-shadow:
-        0 0 8px var(--main-light),
-        0 0 20px var(--main-color),
-        0 0 50px rgba(106, 93, 255, .7);
-
-    opacity: 0;
+    background:
+        linear-gradient(
+            to bottom,
+            var(--main-light),
+            var(--main-color),
+            var(--main-dark)
+        );
 
     transform:
-        translateX(-50%)
         scaleY(0);
 
-    transform-origin: center;
+    transform-origin:
+        bottom;
+
+    will-change:
+        transform;
 
     transition:
-        opacity .2s ease,
-        transform .4s ease;
+        transform .8s
+        cubic-bezier(.76,0,.24,1);
 }
 
 
-/* 중앙선 등장 */
+/* =====================================================
+   FILL
+   아래 → 위
+===================================================== */
 
-#loader.line-active .split-line {
-    opacity: 1;
+#loader.transition-fill
+.page-transition {
 
     transform:
-        translateX(-50%)
         scaleY(1);
+
+    transform-origin:
+        bottom;
 }
 
 
-/* =========================
-   커튼이 열리기 시작하면
-   중앙선도 동시에 사라짐
-========================= */
+/* =====================================================
+   REVEAL
+   위 → 아래
+===================================================== */
 
-#loader.is-opening {
-    background: transparent;
-}
+#loader.transition-reveal
+.page-transition {
 
-
-#loader.is-opening .split-line {
-    opacity: 0;
     transform:
-        translateX(-50%)
         scaleY(0);
 
+    transform-origin:
+        top;
+
     transition:
-        opacity .25s ease,
-        transform .25s ease;
+        transform .75s
+        cubic-bezier(.76,0,.24,1);
 }
 
-#loader.is-opening .loader-video,
-#loader.is-opening .video-overlay,
-#loader.is-opening .noise,
-#loader.is-opening .left-progress,
-#loader.is-opening .right-content,
-#loader.is-opening .corner-text {
+
+/* =====================================================
+   REVEAL 시 로딩 화면 제거
+===================================================== */
+
+#loader.transition-reveal {
+
+    background:
+        transparent;
+}
+
+
+#loader.transition-reveal
+.loader-video,
+
+#loader.transition-reveal
+.video-overlay,
+
+#loader.transition-reveal
+.noise {
+
     opacity: 0;
-    transition: opacity .25s ease;
 }
 
-#loader.is-opening::after {
+
+#loader.transition-reveal::after {
+
     opacity: 0;
-    transition: opacity .25s ease;
 }
 
+
+/* =====================================================
+   HIDDEN
+===================================================== */
+
+#loader.hidden {
+
+    display: none;
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 768px) {
+
+    .right-content {
+
+        margin-left: 6vw;
+    }
+
+
+    .bottom-progress {
+
+        bottom: 35px;
+
+        padding:
+            0 6vw;
+    }
+
+
+    .progress-track {
+
+        height: 3px;
+    }
+
+}

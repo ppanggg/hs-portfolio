@@ -293,129 +293,303 @@ $(function () {
         $('.popup1-media').empty();
     });
 
-
     /* ===============================
-       9. 로딩 애니메이션
+    9. LOADING ANIMATION
     =============================== */
-    const loader = document.getElementById('loader');
-    const progressBar = document.querySelector('.progress-bar');
-    const percentText = document.querySelector('.percent-text');
-    const container = document.querySelector('.left-progress');
-    const statusText = document.getElementById('loading-status');
-    const main = document.getElementById('main');
+    const loader =
+        document.getElementById('loader');
     
-    if (!loader || !progressBar || !percentText || !container || !statusText) {
-        console.error('LOADER ELEMENT NOT FOUND');
+    const progressBar =
+        document.querySelector('.progress-bar');
+    
+    const percentText =
+        document.querySelector('.percent-text');
+    
+    const statusText =
+        document.getElementById('loading-status');
+    
+    const main =
+        document.querySelector('main');
+    
+    
+    /* ===============================
+       ELEMENT CHECK
+    =============================== */
+    
+    if (
+        !loader ||
+        !progressBar ||
+        !percentText ||
+        !statusText
+    ) {
+    
+        console.error(
+            'LOADER ELEMENT NOT FOUND'
+        );
+    
     } else {
     
         let value = 0;
     
+    
+        /* ===============================
+           STATUS
+        =============================== */
+    
         const statuses = [
-            [0, 'Preparing experience...'],
+    
+            [0,  'Preparing experience...'],
+    
             [20, 'Loading assets...'],
+    
             [45, 'Synchronizing data...'],
+    
             [65, 'Initializing character...'],
+    
             [82, 'Establishing connection...'],
+    
             [95, 'Entering world...']
+    
         ];
     
     
         function updateStatus(value) {
     
-            let current = statuses[0][1];
-            for (const [threshold, text] of statuses) {
-                if (value >= threshold) {
+            let current =
+                statuses[0][1];
+    
+    
+            for (
+                const [threshold, text]
+                of statuses
+            ) {
+    
+                if (
+                    value >= threshold
+                ) {
+    
                     current = text;
+    
                 }
+    
             }
     
     
-            if (statusText.textContent !== current) {
-                statusText.style.opacity = '0';
-                statusText.style.transform = 'translateY(4px)';
+            if (
+                statusText.textContent !==
+                current
+            ) {
+    
+                statusText.style.opacity =
+                    '0';
+    
+                statusText.style.transform =
+                    'translateY(4px)';
+    
+    
                 setTimeout(function () {
-                    statusText.textContent = current;
-                    statusText.style.opacity = '1';
-                    statusText.style.transform = 'translateY(0)';
+    
+                    statusText.textContent =
+                        current;
+    
+                    statusText.style.opacity =
+                        '1';
+    
+                    statusText.style.transform =
+                        'translateY(0)';
+    
                 }, 120);
+    
             }
+    
         }
     
+    
+        /* ===============================
+           LOADING
+        =============================== */
     
         function animateLoader() {
-            const remaining = 100 - value;
-            const speed = Math.max(
-                0.08,
-                remaining * 0.015
-            );
+    
+            const remaining =
+                100 - value;
+    
+    
+            const speed =
+                Math.max(
+                    0.08,
+                    remaining * 0.015
+                );
+    
+    
             value += speed;
+    
+    
             if (value > 100) {
+    
                 value = 100;
+    
             }
-            progressBar.style.height =
-                value + '%';
+    
+    
+            /* ===============================
+               HORIZONTAL PROGRESS
+            =============================== */
+    
+            progressBar.style.transform =
+                `scaleX(${value / 100})`;
+    
+    
+            /* ===============================
+               PERCENT
+            =============================== */
+    
             percentText.textContent =
                 Math.floor(value) + '%';
-            const barEnd =
-                progressBar.getBoundingClientRect().bottom -
-                container.getBoundingClientRect().top;
     
-            percentText.style.top =
-                barEnd + 'px';
     
-            percentText.style.transform =
-                'translateY(-100%)';
+            /* ===============================
+               STATUS
+            =============================== */
+    
             updateStatus(value);
     
+    
+            /* ===============================
+               CONTINUE
+            =============================== */
+    
             if (value < 100) {
-                requestAnimationFrame(animateLoader);
+    
+                requestAnimationFrame(
+                    animateLoader
+                );
+    
             } else {
+    
                 finishLoader();
+    
             }
+    
         }
     
+    
+        /* ===============================
+           FINISH
+        =============================== */
+    
         function finishLoader() {
-            // 1. WELCOME
-            statusText.textContent = 'WELCOME.';
-        
+    
+            /* ===============================
+               1. 100%
+            =============================== */
+    
+            statusText.style.opacity =
+                '0';
+    
+            statusText.style.transform =
+                'translateY(4px)';
+    
+    
             setTimeout(function () {
-        
-                // 2. 커튼 중앙으로 닫기
-                loader.classList.add('curtain-active');
-        
-                // 3. 커튼 완전히 닫힘
+    
+    
+                /* ===============================
+                   2. ACCESS GRANTED
+                =============================== */
+    
+                statusText.textContent =
+                    'ACCESS GRANTED';
+    
+                statusText.style.opacity =
+                    '1';
+    
+                statusText.style.transform =
+                    'translateY(0)';
+    
+    
+                /* ===============================
+                   3. ACCESS GRANTED DISPLAY
+                =============================== */
+    
                 setTimeout(function () {
-        
-                    // 4. 중앙선 등장
-                    loader.classList.add('line-active');
-        
-                    // 5. 중앙선 + 완전히 닫힌 커튼 유지
+    
+    
+                    /*
+                     * 로딩 UI 제거
+                     */
+    
+                    loader.classList.add(
+                        'loaded'
+                    );
+    
+    
+                    /*
+                     * 로딩 UI가 사라지는 순간
+                     * 바로 Fill 시작
+                     */
+    
+                    loader.classList.add(
+                        'transition-fill'
+                    );
+    
+    
+                    /* ===============================
+                       4. FILL COMPLETE
+                    =============================== */
+    
                     setTimeout(function () {
-        
-                        // 6. 메인 화면을 뒤에서 준비
-                        main.style.opacity = '1';
-        
-                        // 7. 중앙선 제거 + 커튼 좌우로 열기
-                        loader.classList.add('is-opening');
-        
-                        // 8. 커튼 완전히 열린 뒤 loader 제거
+    
+    
+                        /*
+                         * MAIN은 원래 뒤에 존재.
+                         *
+                         * 이 시점에서
+                         * 컬러 화면이 완전히 덮었으므로
+                         * Reveal 시작.
+                         */
+    
+                        loader.classList.add(
+                            'transition-reveal'
+                        );
+    
+    
+                        /* ===============================
+                           5. REVEAL COMPLETE
+                        =============================== */
+    
                         setTimeout(function () {
-        
-                            loader.style.display = 'none';
-                            document.body.classList.remove('loading');
-        
-                        }, 1200);
-        
-                    }, 300);
-        
-                }, 1200);
-        
-            }, 600);
+    
+                            loader.classList.add(
+                                'hidden'
+                            );
+    
+                            document.body.classList.remove(
+                                'loading'
+                            );
+    
+                        }, 750);
+    
+    
+                    }, 800);
+    
+    
+                }, 450);
+    
+    
+            }, 150);
+    
         }
-
-        // ★ 로딩 시작
+    
+    
+        /* ===============================
+           START
+        =============================== */
+    
         animateLoader();
-
+    
     }
+
+
 
 });
