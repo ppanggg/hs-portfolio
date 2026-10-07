@@ -91,40 +91,6 @@ $(function () {
         }
     });
 
-
-    /* ===============================
-       5. 마우스 라이트 효과
-    =============================== */
-    const page1 = document.querySelector(".page1");
-    const light = document.querySelector(".mouse-light");
-
-    if (page1 && light) {
-        let mouseX = 0;
-        let mouseY = 0;
-        let currentX = 0;
-        let currentY = 0;
-
-        page1.addEventListener("mousemove", (e) => {
-            const rect = page1.getBoundingClientRect();
-
-            mouseX = e.clientX - rect.left;
-            mouseY = e.clientY - rect.top;
-        });
-
-        function animate() {
-            currentX += (mouseX - currentX) * 0.08;
-            currentY += (mouseY - currentY) * 0.08;
-
-            light.style.left = currentX + "px";
-            light.style.top = currentY + "px";
-
-            requestAnimationFrame(animate);
-        }
-
-        animate();
-    }
-
-
     /* ===============================
        6. Swiper
     =============================== */
